@@ -33,4 +33,4 @@ Script adds "/images" to server address url automatically.
 
 **Logs**
 
-'uploader.log' file is created in the same directory with main.py script. It contains events / errors that occur during script execution.
+After main.py script execution 'uploader.log' file is created within same directory. It contains events / errors that occur during script execution.
