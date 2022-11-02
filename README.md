@@ -16,7 +16,7 @@ Install requirements with `pip -r requirements.txt` command.
 Parameters for **Task 2** script:
 
 --server is for setting server address i.e. 
-main.py --server https://yourserveraddr.com/
+main.py --server https://yourserveraddr.com
 
 --imgdir parameter configures full path for directory with images you are going to upload
 
