@@ -9,9 +9,9 @@ Script "main.py" filters dictionary for same id operations and returns ones with
 ## Task2
 Script uploads image files to specified server onto '/uploads' address.
 
-**Requirements**: Python3, installed modules from requirements.
+**Requirements**: Python3, installed modules from requirements.txt.
 
-Install requirements with `pip -r requirements` command.
+Install requirements with `pip -r requirements.txt` command.
 
 Parameters for **Task 2** script:
 
