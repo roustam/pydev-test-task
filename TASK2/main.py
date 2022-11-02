@@ -62,7 +62,7 @@ if __name__ == "__main__":
     parser.add_argument("--imgdir", help="Provide a local directory path")
     args = parser.parse_args()
 
-    dest_url = args.server or DEFAULT_DEST_URL
+    dest_url = "/".join([args.server, 'images']) or DEFAULT_DEST_URL
     image_dir = args.imgdir or DEFAULT_IMAGE_DIR_PATH
 
     log.info('Script started. Uploading images to {0} server'.format(dest_url))
