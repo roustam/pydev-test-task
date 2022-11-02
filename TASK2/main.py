@@ -56,13 +56,20 @@ async def main(image_dir_path):
     else:
         log.info('Directory is empty'.format())
 
+
+def server_url(server_address):
+    if server_address:
+        return "/".join([server_address, 'images'])
+    else:
+        return DEFAULT_DEST_URL
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--server", help="Provide a remote server address")
     parser.add_argument("--imgdir", help="Provide a local directory path")
     args = parser.parse_args()
 
-    dest_url = "/".join([args.server, 'images']) or DEFAULT_DEST_URL
+    dest_url = server_url(args.server)
     image_dir = args.imgdir or DEFAULT_IMAGE_DIR_PATH
 
     log.info('Script started. Uploading images to {0} server'.format(dest_url))
