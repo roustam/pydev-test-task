@@ -29,7 +29,7 @@ Script adds "/images" to server address url automatically.
 
 **Example**
 
-    python3 main.py --imgdir ~/Desktop/MyImages --server https://mywebserver.org/
+    python3 main.py --imgdir ~/Desktop/MyImages --server https://mywebserver.org
 
 **Logs**
 
