@@ -16,6 +16,8 @@ DEFAULT_DEST_URL = 'https://httpbin.org/post'
 DEFAULT_IMAGE_DIR_PATH = '/var/www/images'
 MAX_ASYNC_TASKS = 100
 
+sem = asyncio.Semaphore(MAX_ASYNC_TASKS)
+
 
 def get_files(image_dir_path):
     allowed_ext = ('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif')
@@ -36,16 +38,16 @@ async def upload_file(session, local_path):
             log.error('Error: {0}'.format(e))
 
 
+async def safe_upload(session, local_path):
+    async with sem:  # limit num of simultaneous uploads
+        return await upload_file(session, local_path)
+
+
 async def upload_files(paths):
     async with aiohttp.ClientSession() as session:
-        tasks = []
-        for path in paths:
-            tasks.append(upload_file(session, path))
-
-            if len(tasks) == MAX_ASYNC_TASKS:
-                await asyncio.gather(*tasks)
-                tasks = []
-        await asyncio.gather(*tasks)
+        await asyncio.gather(
+            *[safe_upload(session, path) for path in paths]
+        )
 
 
 async def main(image_dir_path):
@@ -62,6 +64,7 @@ def server_url(server_address):
         return "/".join([server_address, 'images'])
     else:
         return DEFAULT_DEST_URL
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
